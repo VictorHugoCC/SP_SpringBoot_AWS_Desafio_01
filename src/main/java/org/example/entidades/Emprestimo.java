@@ -46,7 +46,7 @@ public class Emprestimo {
         this.multa = multa;
     }
 
-    // Getters e Setters
+
     public Long getIdEmprestimo() {
         return id_emprestimo;
     }

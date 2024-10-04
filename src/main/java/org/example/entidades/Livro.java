@@ -22,7 +22,7 @@ public class Livro {
     private Date dataPublicacao;
 
     @Column(nullable = false, unique = true)
-    private String isb;
+    private String isbn;
 
     @Column(nullable = false)
     private String genero;
@@ -33,17 +33,16 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(Long id_livro, String titulo, Autor autor, Date dataPublicacao, String isb, String genero, int quantidade) {
+    public Livro(Long id_livro, String titulo, Autor autor, Date dataPublicacao, String isbn, String genero, int quantidade) {
         this.id_livro = id_livro;
         this.titulo = titulo;
         this.autor = autor;
         this.dataPublicacao = dataPublicacao;
-        this.isb = isb;
+        this.isbn = isbn;
         this.genero = genero;
         this.quantidade = quantidade;
     }
 
-    // Getters e Setters
     public Long getIdLivro() {
         return id_livro;
     }
@@ -77,11 +76,11 @@ public class Livro {
     }
 
     public String getIsb() {
-        return isb;
+        return isbn;
     }
 
-    public void setIsb(String isb) {
-        this.isb = isb;
+    public void setIsb(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getGenero() {
@@ -107,7 +106,7 @@ public class Livro {
                 ", titulo='" + titulo + '\'' +
                 ", autor=" + autor +
                 ", dataPublicacao=" + dataPublicacao +
-                ", isb='" + isb + '\'' +
+                ", isbn='" + isbn + '\'' +
                 ", genero='" + genero + '\'' +
                 ", quantidade=" + quantidade +
                 '}';
