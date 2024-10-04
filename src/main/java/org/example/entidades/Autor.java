@@ -8,7 +8,7 @@ public class Autor extends Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_autor;
+    private int id_autor;
 
     @Column(nullable = false, unique = true)
     private String nome;
@@ -26,20 +26,19 @@ public class Autor extends Pessoa {
     public Autor() {
     }
 
-    public Autor(String nome, Long id_autor, String nome1, Date dataNascimento, String nacionalidade, String biografia) {
+    public Autor(String nome, String nome1, Date dataNascimento, String nacionalidade, String biografia) {
         super(nome);
-        this.id_autor = id_autor;
         this.nome = nome1;
         this.dataNascimento = dataNascimento;
         this.nacionalidade = nacionalidade;
         this.biografia = biografia;
     }
 
-    public Long getIdAutor() {
+    public int getIdAutor() {
         return id_autor;
     }
 
-    public void setIdAutor(Long id_autor) {
+    public void setIdAutor(int id_autor) {
         this.id_autor = id_autor;
     }
 

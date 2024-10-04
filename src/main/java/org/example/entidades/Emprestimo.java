@@ -3,64 +3,67 @@ package org.example.entidades;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Emprestimo {
 
+
+    public enum EstadoEmprestimo {
+        ATIVO,
+        CONCLUIDO,
+        ATRASADO
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_emprestimo;
-
-    @ManyToOne
-    @JoinColumn(name = "livro_id", nullable = false)
-    private Livro livro;
+    private int id_emprestimo;
 
     @ManyToOne
     @JoinColumn(name = "membro_id", nullable = false)
     private Membro membro;
 
-    @Column(name = "data_emprestimo", nullable = false)
+    @ManyToMany
+    @JoinTable(
+            name = "emprestimo_livro",
+            joinColumns = @JoinColumn(name = "emprestimo_id"),
+            inverseJoinColumns = @JoinColumn(name = "livro_id")
+    )
+    private List<Livro> livros;
+
     @Temporal(TemporalType.DATE)
+    @Column(name = "data_emprestimo", nullable = false)
     private Date dataEmprestimo;
 
-    @Column(name = "data_devolucao")
     @Temporal(TemporalType.DATE)
+    @Column(name = "data_devolucao", nullable = true)
     private Date dataDevolucao;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String estado;
+    private EstadoEmprestimo estado;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private BigDecimal multa;
 
-    public Emprestimo() {
-    }
+    public Emprestimo() {}
 
-    public Emprestimo(Long id_emprestimo, Livro livro, Membro membro, Date dataEmprestimo, Date dataDevolucao, String estado, BigDecimal multa) {
-        this.id_emprestimo = id_emprestimo;
-        this.livro = livro;
+    public Emprestimo(Membro membro, List<Livro> livros, Date dataEmprestimo, Date dataDevolucao, EstadoEmprestimo estado, BigDecimal multa) {
         this.membro = membro;
+        this.livros = livros;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
         this.estado = estado;
         this.multa = multa;
     }
 
-
-    public Long getIdEmprestimo() {
+    public int getIdEmprestimo() {
         return id_emprestimo;
     }
 
-    public void setIdEmprestimo(Long id_emprestimo) {
+    public void setIdEmprestimo(int id_emprestimo) {
         this.id_emprestimo = id_emprestimo;
-    }
-
-    public Livro getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livro livro) {
-        this.livro = livro;
     }
 
     public Membro getMembro() {
@@ -69,6 +72,14 @@ public class Emprestimo {
 
     public void setMembro(Membro membro) {
         this.membro = membro;
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
     }
 
     public Date getDataEmprestimo() {
@@ -87,11 +98,11 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public String getEstado() {
+    public EstadoEmprestimo getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoEmprestimo estado) {
         this.estado = estado;
     }
 
@@ -101,18 +112,5 @@ public class Emprestimo {
 
     public void setMulta(BigDecimal multa) {
         this.multa = multa;
-    }
-
-    @Override
-    public String toString() {
-        return "Emprestimo{" +
-                "id_emprestimo=" + id_emprestimo +
-                ", livro=" + livro +
-                ", membro=" + membro +
-                ", dataEmprestimo=" + dataEmprestimo +
-                ", dataDevolucao=" + dataDevolucao +
-                ", estado='" + estado + '\'' +
-                ", multa=" + multa +
-                '}';
     }
 }

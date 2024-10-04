@@ -9,7 +9,7 @@ public class Membro extends Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_membro;
+    private int id_membro;
 
     @Column(nullable = false)
     private String telefone;
@@ -28,20 +28,19 @@ public class Membro extends Pessoa {
     public Membro() {
     }
 
-    public Membro(String nome, Long id_membro, String telefone, String email, String endereco, Date dataAssociacao) {
+    public Membro(String nome, String telefone, String email, String endereco, Date dataAssociacao) {
         super(nome);
-        this.id_membro = id_membro;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
         this.dataAssociacao = dataAssociacao;
     }
 
-    public Long getIdMembro() {
+    public int getIdMembro() {
         return id_membro;
     }
 
-    public void setIdMembro(Long id_membro) {
+    public void setIdMembro(int id_membro) {
         this.id_membro = id_membro;
     }
 

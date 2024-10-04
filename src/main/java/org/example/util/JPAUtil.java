@@ -28,16 +28,9 @@ public class JPAUtil {
     public static AutorService getAutorService() {
         return new AutorService(em);
     }
-
+    // Retorna o LivroService
     public static LivroService getLivroService() {
         return new LivroService(em);
     }
 
-
-    // Fecha o EntityManager
-    public static void fecharEntityManager() {
-        if (em.isOpen()) {
-            em.close();
-        }
-    }
 }

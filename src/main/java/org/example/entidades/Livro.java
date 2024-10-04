@@ -8,7 +8,7 @@ public class Livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_livro;
+    private int id_livro;
 
     @Column(nullable = false)
     private String titulo;
@@ -33,8 +33,7 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(Long id_livro, String titulo, Autor autor, Date dataPublicacao, String isbn, String genero, int quantidade) {
-        this.id_livro = id_livro;
+    public Livro(String titulo, Autor autor, Date dataPublicacao, String isbn, String genero, int quantidade) {
         this.titulo = titulo;
         this.autor = autor;
         this.dataPublicacao = dataPublicacao;
@@ -43,11 +42,11 @@ public class Livro {
         this.quantidade = quantidade;
     }
 
-    public Long getIdLivro() {
+    public int getIdLivro() {
         return id_livro;
     }
 
-    public void setIdLivro(Long id_livro) {
+    public void setIdLivro(int id_livro) {
         this.id_livro = id_livro;
     }
 
