@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Autor {
+public class Autor extends Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,10 @@ public class Autor {
     public Autor() {
     }
 
-    public Autor(Long id_autor, String nome, Date dataNascimento, String nacionalidade, String biografia) {
+    public Autor(String nome, Long id_autor, String nome1, Date dataNascimento, String nacionalidade, String biografia) {
+        super(nome);
         this.id_autor = id_autor;
-        this.nome = nome;
+        this.nome = nome1;
         this.dataNascimento = dataNascimento;
         this.nacionalidade = nacionalidade;
         this.biografia = biografia;
@@ -78,7 +79,7 @@ public class Autor {
     public String toString() {
         return "Autor{" +
                 "id_autor=" + id_autor +
-                ", nome='" + nome + '\'' +
+                ", nome='" + getNome() + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 ", nacionalidade='" + nacionalidade + '\'' +
                 ", biografia='" + biografia + '\'' +

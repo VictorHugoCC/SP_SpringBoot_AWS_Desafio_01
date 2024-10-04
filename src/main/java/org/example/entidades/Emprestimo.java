@@ -1,6 +1,7 @@
 package org.example.entidades;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -30,12 +31,12 @@ public class Emprestimo {
     private String estado;
 
     @Column(nullable = false)
-    private double multa;
+    private BigDecimal multa;
 
     public Emprestimo() {
     }
 
-    public Emprestimo(Long id_emprestimo, Livro livro, Membro membro, Date dataEmprestimo, Date dataDevolucao, String estado, double multa) {
+    public Emprestimo(Long id_emprestimo, Livro livro, Membro membro, Date dataEmprestimo, Date dataDevolucao, String estado, BigDecimal multa) {
         this.id_emprestimo = id_emprestimo;
         this.livro = livro;
         this.membro = membro;
@@ -94,11 +95,11 @@ public class Emprestimo {
         this.estado = estado;
     }
 
-    public double getMulta() {
+    public BigDecimal getMulta() {
         return multa;
     }
 
-    public void setMulta(double multa) {
+    public void setMulta(BigDecimal multa) {
         this.multa = multa;
     }
 

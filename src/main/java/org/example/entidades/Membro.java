@@ -5,14 +5,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Membro {
+public class Membro extends Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_membro;
-
-    @Column(nullable = false)
-    private String nome;
 
     @Column(nullable = false)
     private String telefone;
@@ -31,9 +28,9 @@ public class Membro {
     public Membro() {
     }
 
-    public Membro(Long id_membro, String nome, String telefone, String email, String endereco, Date dataAssociacao) {
+    public Membro(String nome, Long id_membro, String telefone, String email, String endereco, Date dataAssociacao) {
+        super(nome);
         this.id_membro = id_membro;
-        this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
@@ -48,13 +45,6 @@ public class Membro {
         this.id_membro = id_membro;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getTelefone() {
         return telefone;
@@ -92,7 +82,7 @@ public class Membro {
     public String toString() {
         return "Membro{" +
                 "id_membro=" + id_membro +
-                ", nome='" + nome + '\'' +
+                ", nome='" + getNome() + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", email='" + email + '\'' +
                 ", endereco='" + endereco + '\'' +
