@@ -15,13 +15,12 @@ public class Emprestimo {
         ATRASADO
     }
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_emprestimo;
 
     @ManyToOne
-    @JoinColumn(name = "membro_id", nullable = false)
+    @JoinColumn(name = "membro", nullable = false)
     private Membro membro;
 
     @ManyToMany
@@ -37,32 +36,24 @@ public class Emprestimo {
     private Date dataEmprestimo;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_devolucao", nullable = true)
+    @Column(name = "data_devolucao")
     private Date dataDevolucao;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EstadoEmprestimo estado;
 
-    @Column(nullable = true)
+    @Column
     private BigDecimal multa;
 
-    public Emprestimo() {}
-
-    public Emprestimo(Membro membro, List<Livro> livros, Date dataEmprestimo, Date dataDevolucao, EstadoEmprestimo estado, BigDecimal multa) {
-        this.membro = membro;
-        this.livros = livros;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
-        this.estado = estado;
-        this.multa = multa;
+    public Emprestimo() {
     }
 
-    public int getIdEmprestimo() {
+    public int getId_emprestimo() {
         return id_emprestimo;
     }
 
-    public void setIdEmprestimo(int id_emprestimo) {
+    public void setId_emprestimo(int id_emprestimo) {
         this.id_emprestimo = id_emprestimo;
     }
 
@@ -112,5 +103,18 @@ public class Emprestimo {
 
     public void setMulta(BigDecimal multa) {
         this.multa = multa;
+    }
+
+    @Override
+    public String toString() {
+        return "Emprestimo{" +
+                "id_emprestimo=" + id_emprestimo +
+                ", membro=" + membro +
+                ", livros=" + livros +
+                ", dataEmprestimo=" + dataEmprestimo +
+                ", dataDevolucao=" + dataDevolucao +
+                ", estado=" + estado +
+                ", multa=" + multa +
+                '}';
     }
 }

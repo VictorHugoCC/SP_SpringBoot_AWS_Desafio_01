@@ -2,6 +2,7 @@ package org.example.util;
 
 import org.example.entidades.Emprestimo;
 import org.example.servico.AutorService;
+import org.example.servico.EmprestimoService;
 import org.example.servico.LivroService;
 import org.example.servico.MembroService;
 
@@ -31,6 +32,10 @@ public class JPAUtil {
     // Retorna o LivroService
     public static LivroService getLivroService() {
         return new LivroService(em);
+    }
+
+    public static EmprestimoService getEmprestimoService() {
+        return new EmprestimoService(em);
     }
 
 }

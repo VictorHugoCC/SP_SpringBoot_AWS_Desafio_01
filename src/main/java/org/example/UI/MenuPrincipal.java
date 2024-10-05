@@ -1,10 +1,9 @@
 package org.example.UI;
-
-import org.example.entidades.Membro;
-import org.example.servico.MembroService;
+import org.example.util.InputUtil;
 import org.example.util.JPAUtil;
 
 import javax.persistence.EntityManager;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -35,9 +34,8 @@ public class MenuPrincipal {
                 case 3 -> cadastroMembros();
                 case 4 -> emprestimoLivros();
                 case 5 -> devolucaoLivros();
-                case 6 -> multaPorAtraso();
-                case 7 -> relatorios();
-                case 8 -> {
+                case 6 -> relatorios();
+                case 0 -> {
                     System.out.println("Saindo...");
                     continuar = false;
                 }
@@ -61,20 +59,57 @@ public class MenuPrincipal {
         membroMenu.exibirMenuMembro();
     }
 
+//    Corrigir posteriormente esse menu
 
     private void emprestimoLivros() {
-        System.out.println("Opção de Empréstimo de Livros");
+        System.out.print("Digite o ID do Membro: ");
+        int idMembro = scanner.nextInt();
+
+        System.out.print("Digite o ID do Livro: ");
+        int idLivro = scanner.nextInt();
+
+        String dataEmprestimoStr = InputUtil.obterInputObrigatorio("Digite a data do empréstimo (formato yyyy-MM-dd): ");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dataEmprestimo;
+        try {
+            dataEmprestimo = format.parse(dataEmprestimoStr);
+        } catch (Exception e) {
+            System.out.println("Formato de data inválido. Use o formato yyyy-MM-dd.");
+            return;
+        }
+
+        JPAUtil.getEmprestimoService().realizarEmprestimo(idMembro, idLivro, dataEmprestimo);
     }
+
 
     private void devolucaoLivros() {
         System.out.println("Opção de Devolução de Livros");
+
+        int idEmprestimo = Integer.parseInt(InputUtil.obterInputObrigatorio("Digite o ID do Empréstimo: "));
+        Date dataDevolucao = new Date();
+
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+
+
+            JPAUtil.getEmprestimoService().concluirEmprestimo(idEmprestimo, dataDevolucao);
+
+            em.getTransaction().commit();
+            System.out.println("Empréstimo concluído com sucesso!");
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Erro ao atualizar Emprestimo: " + e.getMessage());
+        } finally {
+            em.close();
+        }
     }
 
-    private void multaPorAtraso() {
-        System.out.println("Opção de Multa por Atraso");
-    }
 
     private void relatorios() {
         System.out.println("Opção de Relatórios");
+        JPAUtil.getEmprestimoService().listarEmprestimos();
     }
 }

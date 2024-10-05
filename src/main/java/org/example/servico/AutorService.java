@@ -13,7 +13,7 @@ public class AutorService extends GenericService<Autor> {
         super(entityManager, Autor.class);
     }
 
-    public Autor buscarAutorPorNome(String nome) {
+    public Autor buscarAutor(String nome) {
         try {
             String jpql = "SELECT a FROM Autor a WHERE LOWER(a.nome) = LOWER(:nome)";
             return entityManager.createQuery(jpql, Autor.class)

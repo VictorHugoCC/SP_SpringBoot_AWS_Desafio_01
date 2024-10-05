@@ -16,7 +16,7 @@ public class AutorMenu {
 
         String nome = InputUtil.obterInputObrigatorio("Nome do Autor: ");
 
-        Autor autorExistente = autorService.buscarAutorPorNome(nome);
+        Autor autorExistente = autorService.buscarAutor(nome);
         if (autorExistente != null) {
             System.out.println("Erro: Já existe um autor registrado com esse nome.");
             return;

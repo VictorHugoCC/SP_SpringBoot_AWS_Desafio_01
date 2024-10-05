@@ -14,7 +14,7 @@ public class Livro {
     private String titulo;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id", nullable = false)
+    @JoinColumn(name = "autor", nullable = false)
     private Autor autor;
 
     @Column(name = "data_publicacao", nullable = false)

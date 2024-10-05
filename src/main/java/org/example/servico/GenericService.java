@@ -22,7 +22,7 @@ public class GenericService<T> {
         }
     }
 
-    public Optional<T> buscarPorId(Long id) {
+    public Optional<T> buscarPorId(int id) {
         try {
             return Optional.ofNullable(repositorio.buscarPorId(id));
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class GenericService<T> {
         }
     }
 
-    public void deletar(Long id) {
+    public void deletar(int id) {
         try {
             Optional<T> entity = buscarPorId(id);
             entity.ifPresentOrElse(e -> {

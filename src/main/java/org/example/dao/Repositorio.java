@@ -19,7 +19,7 @@ public class Repositorio<T> {
         entityManager.getTransaction().commit();
     }
 
-    public T buscarPorId(Long id) {
+    public T buscarPorId(int id) {
         return entityManager.find(entityClass, id);
     }
 
@@ -34,7 +34,7 @@ public class Repositorio<T> {
         entityManager.getTransaction().commit();
     }
 
-    public void deletar(Long id) {
+    public void deletar(int id) {
         T entity = entityManager.find(entityClass, id);
         if (entity != null) {
             entityManager.getTransaction().begin();

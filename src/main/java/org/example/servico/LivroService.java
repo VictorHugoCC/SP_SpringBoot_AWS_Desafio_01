@@ -8,14 +8,13 @@ import javax.persistence.Persistence;
 
 public class LivroService extends GenericService<Livro> {
     private static final EntityManagerFactory desafioB = Persistence.createEntityManagerFactory("desafioB");
-    private static EntityManager entityManager = desafioB.createEntityManager();
+    private static final EntityManager entityManager = desafioB.createEntityManager();
 
     public LivroService(EntityManager entityManager) {
         super(entityManager, Livro.class);
     }
 
-    // Método para buscar Livro por ISBN
-    public Livro buscarLivroPorISBN(String isbn) {
+    public Livro buscarLivro(String isbn) {
         try {
             String jpql = "SELECT l FROM Livro l WHERE l.isbn = :isbn";
             return entityManager.createQuery(jpql, Livro.class)
@@ -28,4 +27,6 @@ public class LivroService extends GenericService<Livro> {
             return null;
         }
     }
+
+
 }
