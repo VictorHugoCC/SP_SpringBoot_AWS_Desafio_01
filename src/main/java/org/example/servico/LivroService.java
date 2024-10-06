@@ -7,12 +7,13 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 public class LivroService extends GenericService<Livro> {
-    private static final EntityManagerFactory desafioB = Persistence.createEntityManagerFactory("desafioB");
-    private static final EntityManager entityManager = desafioB.createEntityManager();
+    private final EntityManager entityManager ;
 
     public LivroService(EntityManager entityManager) {
         super(entityManager, Livro.class);
+        this.entityManager = entityManager;
     }
+
 
     public Livro buscarLivro(String isbn) {
         try {
@@ -27,6 +28,4 @@ public class LivroService extends GenericService<Livro> {
             return null;
         }
     }
-
-
 }

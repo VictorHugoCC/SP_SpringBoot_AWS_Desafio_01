@@ -13,6 +13,7 @@ public class GenericService<T> {
         this.repositorio = new Repositorio<>(entityManager, entityClass);
     }
 
+
     public void cadastrar(T entity) {
         try {
             repositorio.cadastrar(entity);
@@ -21,6 +22,7 @@ public class GenericService<T> {
             System.out.println("Erro ao cadastrar " + entity.getClass().getSimpleName() + ": " + e.getMessage());
         }
     }
+
 
     public Optional<T> buscarPorId(int id) {
         try {
@@ -31,6 +33,7 @@ public class GenericService<T> {
         }
     }
 
+
     public List<T> listarTodos() {
         try {
             return repositorio.listarTodos();
@@ -39,6 +42,7 @@ public class GenericService<T> {
             return List.of();
         }
     }
+
 
     public void atualizar(T entity) {
         try {
@@ -49,15 +53,5 @@ public class GenericService<T> {
         }
     }
 
-    public void deletar(int id) {
-        try {
-            Optional<T> entity = buscarPorId(id);
-            entity.ifPresentOrElse(e -> {
-                repositorio.deletar(id);
-                System.out.println(e.getClass().getSimpleName() + " deletado com sucesso!");
-            }, () -> System.out.println("Entidade com ID " + id + " não encontrada."));
-        } catch (Exception e) {
-            System.out.println("Erro ao deletar entidade: " + e.getMessage());
-        }
-    }
+
 }

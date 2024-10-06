@@ -6,12 +6,13 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 public class MembroService extends GenericService<Membro> {
-    private static final EntityManagerFactory desafioB = Persistence.createEntityManagerFactory("desafioB");
-    private static EntityManager entityManager = desafioB.createEntityManager();
+    private final EntityManager entityManager;
 
     public MembroService(EntityManager entityManager) {
         super(entityManager, Membro.class);
+        this.entityManager = entityManager;
     }
+
 
     public Membro buscarMembro(String email) {
         try {
@@ -26,5 +27,4 @@ public class MembroService extends GenericService<Membro> {
             return null;
         }
     }
-
 }

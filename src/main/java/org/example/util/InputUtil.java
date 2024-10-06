@@ -18,12 +18,12 @@ public class InputUtil {
                 if (input.isEmpty()) {
                     throw new IllegalArgumentException("Este campo é obrigatório, por favor preencha.");
                 }
-                valido = true; // Se chegar até aqui, a entrada é válida
+                valido = true;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             } catch (InputMismatchException e) {
                 System.out.println("Erro de entrada: tente novamente.");
-                scanner.next(); // Limpa a entrada incorreta
+                scanner.next();
             }
         }
 

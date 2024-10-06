@@ -74,11 +74,11 @@ public class Livro {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public String getIsb() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsb(String isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
