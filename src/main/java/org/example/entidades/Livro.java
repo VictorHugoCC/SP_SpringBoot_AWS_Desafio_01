@@ -8,13 +8,13 @@ public class Livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_livro;
+    private int id_livro;
 
     @Column(nullable = false)
     private String titulo;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id", nullable = false)
+    @JoinColumn(name = "autor", nullable = false)
     private Autor autor;
 
     @Column(name = "data_publicacao", nullable = false)
@@ -22,7 +22,7 @@ public class Livro {
     private Date dataPublicacao;
 
     @Column(nullable = false, unique = true)
-    private String isb;
+    private String isbn;
 
     @Column(nullable = false)
     private String genero;
@@ -33,22 +33,20 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(Long id_livro, String titulo, Autor autor, Date dataPublicacao, String isb, String genero, int quantidade) {
-        this.id_livro = id_livro;
+    public Livro(String titulo, Autor autor, Date dataPublicacao, String isbn, String genero, int quantidade) {
         this.titulo = titulo;
         this.autor = autor;
         this.dataPublicacao = dataPublicacao;
-        this.isb = isb;
+        this.isbn = isbn;
         this.genero = genero;
         this.quantidade = quantidade;
     }
 
-    // Getters e Setters
-    public Long getIdLivro() {
+    public int getIdLivro() {
         return id_livro;
     }
 
-    public void setIdLivro(Long id_livro) {
+    public void setIdLivro(int id_livro) {
         this.id_livro = id_livro;
     }
 
@@ -76,12 +74,12 @@ public class Livro {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public String getIsb() {
-        return isb;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setIsb(String isb) {
-        this.isb = isb;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getGenero() {
@@ -107,7 +105,7 @@ public class Livro {
                 ", titulo='" + titulo + '\'' +
                 ", autor=" + autor +
                 ", dataPublicacao=" + dataPublicacao +
-                ", isb='" + isb + '\'' +
+                ", isbn='" + isbn + '\'' +
                 ", genero='" + genero + '\'' +
                 ", quantidade=" + quantidade +
                 '}';

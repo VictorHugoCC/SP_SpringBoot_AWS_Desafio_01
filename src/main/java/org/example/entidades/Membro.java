@@ -1,18 +1,15 @@
 package org.example.entidades;
 
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-public class Membro {
+public class Membro extends Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_membro;
-
-    @Column(nullable = false)
-    private String nome;
+    private int id_membro;
 
     @Column(nullable = false)
     private String telefone;
@@ -27,33 +24,26 @@ public class Membro {
     @Temporal(TemporalType.DATE)
     private Date dataAssociacao;
 
+    @OneToMany(mappedBy = "membro")
+    private List<Emprestimo> emprestimos;
+
 
     public Membro() {
     }
-
-    public Membro(Long id_membro, String nome, String telefone, String email, String endereco, Date dataAssociacao) {
-        this.id_membro = id_membro;
-        this.nome = nome;
+    public Membro(String nome, String telefone, String email, String endereco, Date dataAssociacao) {
+        super(nome);
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
         this.dataAssociacao = dataAssociacao;
     }
 
-    public Long getIdMembro() {
+    public int getId_membro() {
         return id_membro;
     }
 
-    public void setIdMembro(Long id_membro) {
+    public void setId_membro(int id_membro) {
         this.id_membro = id_membro;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getTelefone() {
@@ -88,17 +78,27 @@ public class Membro {
         this.dataAssociacao = dataAssociacao;
     }
 
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
+    }
+
     @Override
     public String toString() {
         return "Membro{" +
                 "id_membro=" + id_membro +
-                ", nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", email='" + email + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", dataAssociacao=" + dataAssociacao +
+                ", emprestimos=" + emprestimos +
                 '}';
     }
-
-
 }
+
+
+
+
