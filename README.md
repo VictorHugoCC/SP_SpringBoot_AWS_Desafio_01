@@ -49,3 +49,44 @@ Antes de executar o projeto, é necessário configurar o banco de dados MySQL:
 <h1>🎬 Demonstração</h1>
 
 ![Texto Alternativo](src/main/java/org/example/Media/GravaodeTela2024-10-06202144-ezgif.com-video-to-gif-converter.gif)
+
+## 📂 Estrutura de Pastas
+
+### dao
+- **Repositorio:** Classe que implementa as operações básicas de persistência de dados. Tambem inicializa o CRUD.
+
+### entidades
+- **Autor:** Representa os autores dos livros.
+- **Emprestimo:** Gerencia as informações de empréstimos, como datas, multas e estados.
+- **Livro:** Representa os livros na biblioteca, com informações de autor, ISBN, e quantidade disponível.
+- **Membro:** Contém as informações dos membros da biblioteca.
+- **Pessoa:** Classe base para Membro e Autor.
+
+### interfaces
+- **Relatorio:** Interface que define o método `gerarRelatorio()` para a geração de relatórios personalizados.
+
+### relatorios
+- **RelatorioAutores:** Gera um relatório com informações dos autores cadastrados.
+- **RelatorioEMAtrasados:** Lista empréstimos atrasados e detalha os dias de atraso.
+- **RelatorioEmprestimos:** Apresenta um relatório geral de todos os empréstimos.
+- **RelatorioLivros:** Relatório detalhado sobre todos os livros, incluindo autores e disponibilidade.
+- **RelatorioMembros:** Gera um relatório com detalhes de todos os membros.
+
+### servico
+- **AutorService:** Contém operações específicas para gerenciamento de autores.
+- **EmprestimoService:** Realiza operações de empréstimos e devoluções, incluindo o cálculo de multas.
+- **GenericService:** Classe genérica que oferece métodos comuns de serviço.
+- **LivroService:** Contém operações específicas para gerenciamento de livros.
+- **MembroService:** Contém operações específicas para gerenciamento de membros.
+
+### UI
+- **AutorMenu:** Interface de usuário para cadastro e gerenciamento de autores.
+- **EmprestimoMenu:** Interface de usuário para gerenciar empréstimos e devoluções de livros.
+- **LivroMenu:** Interface de usuário para cadastro e gerenciamento de livros.
+- **MembroMenu:** Interface de usuário para cadastro e gerenciamento de membros.
+- **MenuPrincipal:** Interface principal que conecta todas as funcionalidades do sistema.
+- **RelatoriosMenu:** Interface de usuário para geração de diferentes relatórios.
+
+### util
+- **InputUtil:** Métodos auxiliares para captura e validação de entrada do usuário.
+- **JPAUtil:** Configuração do EntityManager para persistência de dados.
