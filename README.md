@@ -11,6 +11,7 @@ Este projeto é um Sistema de Gerenciamento de Biblioteca, desenvolvido em Java,
 - [Configuração do Banco de Dados](#configuração-do-banco-de-dados)
 - [Como Executar o Projeto](#como-executar-o-projeto)
 - [Demonstração](#demonstração)
+- [Estrutura de pastas](#Estrutur-de-pastas)
 
 ## 🚀 Funcionalidades
 
@@ -48,11 +49,13 @@ Antes de executar o projeto, é necessário configurar o banco de dados MySQL:
 
 <h1>🎬 Demonstração</h1>
 
+### Iniciando o projeto e exibindo o menu principal: 
 ![Texto Alternativo](src/main/java/org/example/Media/GravaodeTela2024-10-06202144-ezgif.com-video-to-gif-converter.gif)
 
 ## 📂 Estrutura de Pastas
 
 ### dao
+
 - **Repositorio:** Classe que implementa as operações básicas de persistência de dados. Tambem inicializa o CRUD.
 
 ### entidades
@@ -73,11 +76,25 @@ Antes de executar o projeto, é necessário configurar o banco de dados MySQL:
 - **RelatorioMembros:** Gera um relatório com detalhes de todos os membros.
 
 ### servico
-- **AutorService:** Contém operações específicas para gerenciamento de autores.
-- **EmprestimoService:** Realiza operações de empréstimos e devoluções, incluindo o cálculo de multas.
-- **GenericService:** Classe genérica que oferece métodos comuns de serviço.
-- **LivroService:** Contém operações específicas para gerenciamento de livros.
-- **MembroService:** Contém operações específicas para gerenciamento de membros.
+Explicação detalhada dos métodos principais de cada classe de serviço:
+
+- **AutorService**
+   - `buscarAutor(String nome)`: Busca um autor pelo nome. Útil para verificar se o autor já está cadastrado antes de adicionar um novo autor.
+
+- **EmprestimoService**
+   - `realizarEmprestimo(int idMembro, int idLivro, Date dataEmprestimo)`: Registra um empréstimo de livro. Verifica a disponibilidade do livro e associa ao membro.
+   - `concluirEmprestimo(int idEmprestimo, Date dataDevolucao)`: Conclui o empréstimo de um livro. Calcula a multa, se houver atraso, e atualiza o estado do empréstimo.
+   - `calcularDiasAtraso(Date dataEmprestimo, Date dataDevolucao)`: Calcula a diferença em dias entre as datas de empréstimo e devolução para determinar o atraso.
+   - `listarEmprestimosAtrasados()`: Retorna uma lista de empréstimos cujo estado é "ATRASADO".
+
+- **GenericService<T>**
+   - Esta classe é uma camada de abstração para operações comuns de persistência, como salvar, atualizar, deletar e buscar entidades pelo ID. Isso permite reutilizar métodos genéricos em outros serviços, evitando duplicação de código.
+
+- **LivroService**
+   - `buscarLivro(String isbn)`: Localiza um livro usando o ISBN, útil para validação de duplicatas durante o cadastro de livros.
+
+- **MembroService**
+   - `buscarMembro(String email)`: Busca um membro usando o e-mail, permitindo identificar se o membro já está cadastrado antes de adicioná-lo ao sistema.
 
 ### UI
 - **AutorMenu:** Interface de usuário para cadastro e gerenciamento de autores.
