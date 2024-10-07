@@ -6,6 +6,7 @@ import org.example.servico.AutorService;
 import org.example.servico.LivroService;
 import org.example.util.InputUtil;
 import org.example.util.JPAUtil;
+
 import java.util.*;
 
 public class LivroMenu {
@@ -30,17 +31,21 @@ public class LivroMenu {
             } while (livroService.buscarLivro(isbn) != null);
 
             int quantidade = Integer.parseInt(InputUtil.obterInputNumericoValido("Quantidade (apenas números): "));
-            String nomeAutor = InputUtil.obterInputObrigatorio("Nome do Autor: ");
-            Autor autor = autorService.buscarAutor(nomeAutor);
 
-            if (autor != null) {
-                Livro novoLivro = new Livro(titulo, autor, new Date(), isbn, genero, quantidade);
-                livroService.cadastrar(novoLivro);
-                livrosPorAutor.computeIfAbsent(autor, k -> new ArrayList<>()).add(novoLivro);
-                System.out.println("Livro cadastrado e associado ao autor com sucesso!");
-            } else {
-                System.out.println("Autor não encontrado. Verifique o nome e tente novamente.");
-            }
+            Autor autor;
+            do {
+                String nomeAutor = InputUtil.obterInputObrigatorio("Nome do Autor: ");
+                autor = autorService.buscarAutor(nomeAutor);
+
+                if (autor == null) {
+                    System.out.println("Autor não encontrado. Verifique o nome e tente novamente.");
+                }
+            } while (autor == null);
+
+            Livro novoLivro = new Livro(titulo, autor, new Date(), isbn, genero, quantidade);
+            livroService.cadastrar(novoLivro);
+            livrosPorAutor.computeIfAbsent(autor, k -> new ArrayList<>()).add(novoLivro);
+            System.out.println("Livro cadastrado e associado ao autor com sucesso!");
 
         } catch (NumberFormatException e) {
             System.out.println("Erro de formato numérico: " + e.getMessage());
